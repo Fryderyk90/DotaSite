@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-
 namespace Dota.Core.Models
 {
     public partial class DotaMatchInfo
@@ -126,7 +125,7 @@ namespace Dota.Core.Models
         public Team DireTeam { get; set; }
 
         [JsonProperty("players")]
-        public TestInfoPlayer[] Players { get; set; }
+        public Players[] Players { get; set; }
 
         [JsonProperty("patch")]
         public long Patch { get; set; }
@@ -274,7 +273,7 @@ namespace Dota.Core.Models
         public long MatchId { get; set; }
     }
 
-    public partial class TestInfoPlayer
+    public partial class Players
     {
         [JsonProperty("match_id")]
         public long MatchId { get; set; }

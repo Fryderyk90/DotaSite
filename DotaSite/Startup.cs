@@ -25,7 +25,9 @@ namespace DotaSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddScoped<IDotaLeagueRepository,LeagueRepository>();
+            services.AddSingleton<IDotaLeagueRepository,LeagueRepository>();
+            services.AddSingleton< IHeroRepository,HeroRepository > ();
+            services.AddScoped<IDotaMatchInfoRepository, DotaMatchInfoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

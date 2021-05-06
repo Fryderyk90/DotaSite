@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dota.Data.Services
 {
-    interface IHeroRepository
+    public interface IHeroRepository
     {
         public Task<DotaHero[]> GetDotaHeroesAsync();
     }

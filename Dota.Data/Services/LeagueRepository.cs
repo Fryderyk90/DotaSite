@@ -10,7 +10,7 @@ namespace Dota.Data.Services
 {
     public class LeagueRepository : IDotaLeagueRepository
     {
-        async Task<DotaLeague[]> IDotaLeagueRepository.GetAllLeguesAsync()
+        async Task<DotaLeague[]> IDotaLeagueRepository.GetAllLeaguesAsync()
         {
             var client = new HttpClient();
             Task<string> getDotaStringTask = client.GetStringAsync("https://api.opendota.com/api/leagues");

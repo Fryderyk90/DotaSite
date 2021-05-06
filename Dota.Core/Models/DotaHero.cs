@@ -41,12 +41,12 @@ namespace Dota.Core.Models
 
     public partial class DotaHero
     {
-        public static DotaHero[] FromJson(string json) => JsonConvert.DeserializeObject<DotaHero[]>(json, Models.HeroConverter.Settings);
+        public static DotaHero[] FromJson(string json) => JsonConvert.DeserializeObject<DotaHero[]>(json, HeroConverter.Settings);
     }
 
     public static class HeroSerialize
     {
-        public static string ToJson(this DotaHero[] self) => JsonConvert.SerializeObject(self, Models.HeroConverter.Settings);
+        public static string ToJson(this DotaHero[] self) => JsonConvert.SerializeObject(self, HeroConverter.Settings);
     }
 
     internal static class HeroConverter
