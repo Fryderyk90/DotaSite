@@ -9,8 +9,10 @@ namespace Dota.Data.Services
 {
     public interface IDotaMatchInfoRepository
     {
-        Task<DotaMatchInfo> GetAllMatchInfo();
+        Task<DotaMatchInfo> GetAllMatchInfo(string matchUri);
         List<DotaHero> GetHeroesInMatch(DotaHero[] allHeroes, DotaMatchInfo matchInfo);
         DotaHero PlayerHero(long playerHeroId, List<DotaHero> dotaHeroes);
+        List<HeroAndPlayer> HeroesPlayedByPlayer(List<DotaHero> dotaHeroes, Players[] players);
+        List<DotaHero> HeroesByTeam(List<DotaHero> heroesInMatch, Players[] players);
     }
 }

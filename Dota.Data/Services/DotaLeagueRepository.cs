@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Dota.Data.Services
 {
-    public class LeagueRepository : IDotaLeagueRepository
+    public class DotaLeagueRepository : IDotaLeagueRepository
     {
-        async Task<DotaLeague[]> IDotaLeagueRepository.GetAllLeaguesAsync()
+        async Task<DotaLeague[]> IDotaLeagueRepository.GetAllLeaguesAsync(string leagueUri)
         {
             var client = new HttpClient();
-            Task<string> getDotaStringTask = client.GetStringAsync("https://api.opendota.com/api/leagues");
+            Task<string> getDotaStringTask = client.GetStringAsync(leagueUri);
             string dotaString = await getDotaStringTask;
             var allLeagues = DotaLeague.FromJson(dotaString);
 

@@ -7,49 +7,54 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace DotaSite.Pages
 {
     public class IndexModel : PageModel
     {
+        
         private readonly ILogger<IndexModel> _logger;
-        private readonly IDotaLeagueRepository _DotaLeagueRepository;
-        private readonly IDotaMatchInfoRepository _IDotaMatchInfoRepository;
-        private readonly IHeroRepository _IHeroRepository;
+        private readonly IDotaLeagueRepository _idotaLeagueRepository;
+        private readonly IDotaMatchInfoRepository _idotaMatchInfoRepository;
+        private readonly IDotaHeroRepository _idotaHeroRepository;
+        private readonly IConfiguration _configuration;
+        
 
-
-        public DotaLeague[] Leagues { get; set; }
-        public List<DotaHero> DotaHeroes { get; set; }
-        public Players[] Players { get; set; }
-        public DotaHero PlayerHero { get; set; }
+        private DotaLeague[] Leagues { get; set; }
+        private List<DotaHero> DotaHeroes { get; set; }
+        private Players[] Players { get; set; }
+        private DotaHero PlayerHero { get; set; }
+        public List<HeroAndPlayer> PlayerHeros { get; set; }
         public IndexModel
             (
             ILogger<IndexModel> logger,
-            IDotaLeagueRepository dotaLeagueRepository,
-            IDotaMatchInfoRepository iDotaMatchInfoRepository,
-            IHeroRepository iHeroRepository
-            )
+            IDotaLeagueRepository idotaLeagueRepository,
+            IDotaMatchInfoRepository idotaMatchInfoRepository,
+            IDotaHeroRepository idotaHeroRepository, IConfiguration configuration)
         {
             _logger = logger;
-            _DotaLeagueRepository = dotaLeagueRepository;
-            _IDotaMatchInfoRepository = iDotaMatchInfoRepository;
-            _IHeroRepository = iHeroRepository;
+            _idotaLeagueRepository = idotaLeagueRepository;
+            _idotaMatchInfoRepository = idotaMatchInfoRepository;
+            _idotaHeroRepository = idotaHeroRepository;
+            _configuration = configuration;
         }
 
         public async Task OnGetAsync()
         {
-            var allHeroes = await _IHeroRepository.GetDotaHeroesAsync();
-            var matchInfo = await _IDotaMatchInfoRepository.GetAllMatchInfo();
+            var heroUri = _configuration.GetValue<string>("DotaSettings:DotaHeroes");
+            var leagueUri = _configuration.GetValue<string>("DotaSettings:DotaLeagues");
+            var matchUri = _configuration.GetValue<string>("DotaSettings:DotaMatches");
+
+            var allHeroes = await _idotaHeroRepository.GetDotaHeroesAsync(heroUri);
+            var matchInfo = await _idotaMatchInfoRepository.GetAllMatchInfo(matchUri);
             var players = matchInfo.Players;
-            var pickedHeroes = _IDotaMatchInfoRepository.GetHeroesInMatch(allHeroes, matchInfo);
-
-            Leagues = await _DotaLeagueRepository.GetAllLeaguesAsync();
-            DotaHeroes = _IDotaMatchInfoRepository.GetHeroesInMatch(allHeroes, matchInfo);
-            foreach (var playerId in players)
-            {
-
-                PlayerHero = _IDotaMatchInfoRepository.PlayerHero(playerId.HeroId, pickedHeroes);
-            }
+            var pickedHeroes = _idotaMatchInfoRepository.GetHeroesInMatch(allHeroes, matchInfo);
+            PlayerHeros = _idotaMatchInfoRepository.HeroesPlayedByPlayer(pickedHeroes,players);
+            Leagues = await _idotaLeagueRepository.GetAllLeaguesAsync(leagueUri);
+            DotaHeroes = _idotaMatchInfoRepository.GetHeroesInMatch(allHeroes, matchInfo);
+            
+          
 
         }
     }

@@ -7,9 +7,9 @@ namespace Dota.Core.Models
     {
        
 
-        public Players[] Players { get; set; }
+        public Players Player { get; set; }
 
-        public List<DotaHero> Heroes { get; set; }
+        public DotaHero Hero { get; set; }
         
 
     }

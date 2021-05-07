@@ -9,6 +9,6 @@ namespace Dota.Data.Services
 {
     public interface IDotaLeagueRepository
     {
-        Task<DotaLeague[]> GetAllLeaguesAsync();
+        Task<DotaLeague[]> GetAllLeaguesAsync(string leagueUri);
     }
 }

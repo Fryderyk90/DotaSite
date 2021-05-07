@@ -25,8 +25,8 @@ namespace DotaSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddSingleton<IDotaLeagueRepository,LeagueRepository>();
-            services.AddSingleton< IHeroRepository,HeroRepository > ();
+            services.AddSingleton<IDotaLeagueRepository,DotaLeagueRepository>();
+            services.AddSingleton< IDotaHeroRepository,DotaHeroRepository > ();
             services.AddScoped<IDotaMatchInfoRepository, DotaMatchInfoRepository>();
         }
 
