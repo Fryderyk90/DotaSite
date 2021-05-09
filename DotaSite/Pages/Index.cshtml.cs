@@ -18,6 +18,7 @@ namespace DotaSite.Pages
         private readonly IDotaLeagueRepository _idotaLeagueRepository;
         private readonly IDotaMatchInfoRepository _idotaMatchInfoRepository;
         private readonly IDotaHeroRepository _idotaHeroRepository;
+        private readonly IDotaTeamRepository _idotaTeamRepository;
         private readonly IConfiguration _configuration;
         
 
@@ -26,26 +27,33 @@ namespace DotaSite.Pages
         private Players[] Players { get; set; }
         private DotaHero PlayerHero { get; set; }
         public List<HeroAndPlayer> PlayerHeros { get; set; }
+        public List<DotaTeam> DotaTeams { get; set; }
         public IndexModel
             (
             ILogger<IndexModel> logger,
             IDotaLeagueRepository idotaLeagueRepository,
             IDotaMatchInfoRepository idotaMatchInfoRepository,
-            IDotaHeroRepository idotaHeroRepository, IConfiguration configuration)
+            IDotaHeroRepository idotaHeroRepository, IConfiguration configuration, 
+            IDotaTeamRepository idotaTeamRepository
+            )
         {
             _logger = logger;
             _idotaLeagueRepository = idotaLeagueRepository;
             _idotaMatchInfoRepository = idotaMatchInfoRepository;
             _idotaHeroRepository = idotaHeroRepository;
             _configuration = configuration;
+            _idotaTeamRepository = idotaTeamRepository;
         }
 
         public async Task OnGetAsync()
         {
+            //Uris
             var heroUri = _configuration.GetValue<string>("DotaSettings:DotaHeroes");
             var leagueUri = _configuration.GetValue<string>("DotaSettings:DotaLeagues");
             var matchUri = _configuration.GetValue<string>("DotaSettings:DotaMatches");
-
+            var teamUri = _configuration.GetValue<string>("DotaSettings:DotaTeams");
+           
+           
             var allHeroes = await _idotaHeroRepository.GetDotaHeroesAsync(heroUri);
             var matchInfo = await _idotaMatchInfoRepository.GetAllMatchInfo(matchUri);
             var players = matchInfo.Players;
@@ -53,7 +61,7 @@ namespace DotaSite.Pages
             PlayerHeros = _idotaMatchInfoRepository.HeroesPlayedByPlayer(pickedHeroes,players);
             Leagues = await _idotaLeagueRepository.GetAllLeaguesAsync(leagueUri);
             DotaHeroes = _idotaMatchInfoRepository.GetHeroesInMatch(allHeroes, matchInfo);
-            
+            DotaTeams = await _idotaTeamRepository.AllTeamsAsync(teamUri);
           
 
         }

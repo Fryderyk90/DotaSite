@@ -1,38 +1,42 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DotaSite</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
 <body>
 
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - DotaSite</title>
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </head>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom;">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">DOTA</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Matches</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Leagues</a>
-                        </li>                       
-                    </ul>
+
+    <div class="headerbgcolor">
+        <header id="myheader">
+            <nav class="navbar navbar-expand-lg navbar-dark border-bottom;">
+                <div class="container-fluid mycontainer">
+                    <a class="navbar-brand" id="mybrand" href="#"><img src="https://img.icons8.com/fluent/48/000000/dota.png" /></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="mynavlink" href="#">Matches</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" id="mynavlink" href="#">Leagues</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" id="mynavlink" href="#">Teams</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>       
-    </header>
-    <div class="container">
+            </nav>
+        </header>
+    </div>
+    <div class="container maincontainer">
+        <img src="~/img/outfox_guides_dota2_lag_banner.png" class="img-fluid" id="mybannerimg" alt="...">
         <main>
             @RenderBody()
         </main>
