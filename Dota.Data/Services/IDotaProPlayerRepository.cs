@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Dota.Data.Services
 {
-    interface IDotaProPlayerRepository   
+    public interface IDotaProPlayerRepository   
     {
         Task<List<DotaProPlayer>> AllProPlayers(string playerUri);
     }

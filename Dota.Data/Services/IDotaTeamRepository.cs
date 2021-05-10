@@ -11,7 +11,7 @@ namespace Dota.Data.Services
     public interface IDotaTeamRepository
     {
         Task<List<DotaTeam>> AllTeamsAsync(string teamUri);
-        Task<List<DotaProPlayer>> PlayersInTeam(long teamId, List<DotaProPlayer> proPlayers);
+        List<DotaTeamRoster> TeamRoster(List<DotaTeam> teams, List<DotaProPlayer> proPlayers);
     }
 
 }

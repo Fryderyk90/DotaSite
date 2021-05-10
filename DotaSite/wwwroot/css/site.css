@@ -119,7 +119,9 @@ body {
 
 
  #mybannerimg {
-  width:inherit;
+  width: inherit;
+  padding-right: 0px;
+  padding-left: 0px
 }
     
 
@@ -129,8 +131,40 @@ body {
     background-color:darkred;
 }
 
-/*Main----------------------------------------------*/ 
-.maincontainer{
-  background-color: #393E41;
-  padding-top:inherit;
+/*Main----------------------------------------------*/
+.maincontainer {
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: #393E41;
+}
+
+/*LIVETABLE-------------------------------------------*/
+
+#livetableheader {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: white;
+}
+
+#livetablecategorie {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white;
+} 
+
+
+/*Live match card--------------------------------------*/
+#livecard {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-block: solid #8B0E10;
+    background-color: #5D737E;
+}
+#playerscard {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-block: solid #8B0E10;
+    background-color: #5D737E;
 }

@@ -4,31 +4,150 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-<div>
-    <h3>Top 10 Teams</h3>
-    <table class="table table-striped table-hover table-bordered text-center col-md-6">
-        <tr>
-            <th>Team Logo</th>
-            <th>Team Name</th>
-            <th>Rating</th>
 
-        </tr>
-        @foreach (var team in Model.DotaTeams.Take(10))
-        {
+<div row>
 
-            <tr>
-                <td>
-                    <img src="@Url.Content($"{team.LogoUrl}")"/>
-                </td>
-                <td>@team.Name</td>
-                <td>@team.Rating</td>
-            </tr>
-        }
-    </table>
+    @foreach (var match in Model.HeroesInLive.Take(10))
+    {
 
 
-</div>
+        <div class="card col-sm-4" id="livecard">
+            <div class="card-body">
+                <h3 id="livecardheader">Live</h3>
+                <p id="livetext">MatchID @match.Matches.MatchId</p>
+                <p id="livetext">Time Started @match.Matches.ActivateTime</p>
+                <p id="livetext">Tima Elapsed @match.Matches.GameTime</p>
+                <p id="livetext">Dire Score:@match.Matches.RadiantScore</p>
+                <p id="livetext">Dire Score: @match.Matches.DireScore</p>
+                <p id="livetext">Avrage MMR: @match.Matches.AverageMmr</p>
+
+                <table class="table table-hover" id="livetalbebody">
+                    <tr id="livetablerow">
+                        <th id="livetablehead">Player Names</th>
+                        <th id="livetablehead">Heroes</th>
+                        <th id="livetablehead">Pro Or Not</th>
+                    </tr>
+                    @for (int i = 0; i < match.Matches.Players.Length; i++)
+                    {
+
+                        <tr id="livetablerow">
+                            <td id="livetablehead">@match.Matches.Players[i].Name</td>
+                            <td id="livetablehead">@match.Hero.Find(h => h.Id == match.Matches.Players[i].HeroId).LocalizedName</td>
+                            @if (match.Matches.Players[i].IsPro == true)
+                            {
+                                <td id="livetablehead">Is Pro</td>
+                            }
+                            else
+                            {
+                                <td id="livetablehead">Not Pro</td>
+                            }
+                        </tr>
+                    }
+                </table>
+
+                @*<p class="col-6">player name: @match.Matches.Players[i].Name</p>
+                    <p>Hero: @match.Hero.Find(h => h.Id == match.Matches.Players[i].HeroId).LocalizedName;</p>
+                    @if (match.Matches.Players[i].IsPro == true)
+                    {
+                        <p class="col-6"></p>
+                    }
+                    else
+                    {
+                        <p class="col-6"></p>
+                    }*@
+
+
+                <div class="card-footer">
+                    <p id="livefooter">Last Updated: @match.Matches.LastUpdateTime</p>
+                </div>
+            </div>
+        </div>
+    }
+
+    @*<div class="card col-md-6" id="playerscard">
+                <h2>Players</h2>>
+
+                <div class="card-body">
+
+                    <table>
+                        <tr>
+                            <th>Player Name</th>
+                            <th>Hero</th>
+                            <th>Pro or not</th>
+                        </tr>
+                        @foreach (var player in Model.HeroesInLive)
+                        {
+                            <tr>
+                                <td>@player.Players.Name</td>
+                                @if (player.Hero.LocalizedName == null)
+                                {
+                                    <td>Not Picked Yet</td>
+                                }
+                                else
+                                {
+                                    <td>@player.Hero.LocalizedName</td>
+                                }
+
+                                @if (player.Players.IsPro == true)
+                                {
+                                    <td>Is Pro</td>
+                                }
+                                else
+                                {
+                                    <td>Not Pro</td>
+                                }
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>*@
+
+    @*<div>
+            <h3>Live Games</h3>
+            <table class="table table-hover table-bordered text-center col-md-6" id="livetable">
+                <tr>
+                    <th id="livetableheader"></th>
+                    <th id="livetableheader">Team Name</th>
+                    <th id="livetableheader">Kills</th>
+
+                </tr>
+                @foreach (var match in Model.LiveMatches.Take(10))
+                {
+
+
+
+
+
+
+
+
+                    <tr>
+                        <td id="livetablecategorie">Radiant Team</td>
+                        <td>@match.TeamNameRadiant</td>
+                        <td>@match.RadiantScore</td>
+                    </tr>
+                    <tr>
+                        <th id="livetablecategorie">Dier Team</th>
+                        <th>@match.TeamNameDire</th>
+                        <th>@match.DireScore</th>
+                    </tr>
+                    <tr>
+                        <th id="livetableheader">Avrage MMR</th>
+                        <th id="livetableheader">Time Started</th>
+                        <th id="livetableheader">Time Elapsed</th>
+                        <th id="livetableheader">Last Updated</th>
+                    </tr>
+                    <tr>
+                        <th>@match.AverageMmr</th>
+                        <th>@match.ActivateTime</th>
+                        <th>@match.GameTime</th>
+                        <th>@match.LastUpdateTime</th>
+                    </tr>
+
+                }
+            </table>
+
+
+        </div>*@

@@ -29,6 +29,8 @@ namespace DotaSite
             services.AddSingleton< IDotaHeroRepository,DotaHeroRepository > ();
             services.AddSingleton<IDotaTeamRepository,DotaTeamRepository>();
             services.AddScoped<IDotaMatchInfoRepository, DotaMatchInfoRepository>();
+            services.AddSingleton<IDotaProPlayerRepository, DotaProPlayerRepository>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

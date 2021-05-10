@@ -30,6 +30,15 @@ namespace Dota.Data.Services
 
             return matchInfo;
         }
+        async Task<IEnumerable<DotaLiveMatch>> IDotaMatchInfoRepository.GetLiveMatches(string LiveUri)
+        {
+            var client = new HttpClient();
+            Task<string> getDotaStringTask = client.GetStringAsync(LiveUri);
+            string dotaLiveMatchJson = await getDotaStringTask;
+            List<DotaLiveMatch> liveMatches = DotaLiveMatch.FromJson(dotaLiveMatchJson).ToList();
+
+            return liveMatches.OrderByDescending(m => m.AverageMmr);
+        }
 
         DotaHero IDotaMatchInfoRepository.PlayerHero(long playerHeroId, List<DotaHero> dotaHeroes)
         {
@@ -62,6 +71,41 @@ namespace Dota.Data.Services
             return playerPlayedHero;
         }
 
+
+        public IEnumerable<DotaLiveMatchInfo> HeroesInLiveMatches(List<DotaHero> dotaheroes, List<DotaLiveMatch> dotaLiveMatches)
+        {
+            List<DotaLiveMatchInfo> playerPlayedHero = new List<DotaLiveMatchInfo>();
+            List<DotaHero> heroes = new List<DotaHero>();
+            foreach (var match in dotaLiveMatches)
+            {
+                foreach (var player in match.Players.ToList())
+                {
+
+
+
+                    var hero = dotaheroes.Find(h => h.Id == player.HeroId);
+                    if(string.IsNullOrEmpty(player.Name))
+                    {
+                        player.Name = "Name Not Found";
+                    }
+                    heroes.Add(hero);
+                }
+                var playerHero = new DotaLiveMatchInfo()
+                {
+                    Hero = heroes,
+                    
+                    Matches = match
+                };
+                playerPlayedHero.Add(playerHero);
+
+            }
+
+            IEnumerable<DotaLiveMatchInfo> matchinfowithheroes = playerPlayedHero;
+            return matchinfowithheroes;
+        }
+
+
+
         //List<DotaMatchDraft> DraftOfMatch(PicksBan[] draftTiming, List<DotaHero> dotaHeroes)
         //{
         //    foreach (var pick in draftTiming)
@@ -80,13 +124,8 @@ namespace Dota.Data.Services
         //return null;
         //}
 
-        List<DotaHero> IDotaMatchInfoRepository.HeroesByTeam(List<DotaHero> heroesInMatch, Players[] players)
-        {
-            
 
-            return null;
-        }
 
     }
-    
+
 }
