@@ -106,26 +106,13 @@ namespace Dota.Data.Services
 
 
 
-        //List<DotaMatchDraft> DraftOfMatch(PicksBan[] draftTiming, List<DotaHero> dotaHeroes)
-        //{
-        //    foreach (var pick in draftTiming)
-        //    {
-        //        pick
-
-        //        var draftData = new DotaMatchDraft
-        //        {
-        //            Draft =
-        //            Hero =
-        //        }
-
-        //    }
-
-
-        //return null;
-        //}
-
-
-
+            
+      /* public void JoinTable(List<DotaHero> dotaheroes, List<DotaLiveMatch> dotaLiveMatches)
+        {
+            var matchWithHeroNames = from match in dotaLiveMatches
+                                     join DotaHero in dotaheroes on match.Players[].HeroId equals DotaHero.Id
+                                     select new { match, DotaHero };
+        }*/
     }
 
 }

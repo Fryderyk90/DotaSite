@@ -157,7 +157,10 @@ body {
     margin-bottom: 20px;
     margin-left: 10px;
     margin-right: 10px;
-    border-block: solid #8B0E10;
+    border-bottom: solid #8B0E10;
+    border-left: solid #8B0E10;
+    border-right: solid #8B0E10;
+    border-top: solid #8B0E10;
     background-color: #5D737E;
 }
 #playerscard {
@@ -165,6 +168,30 @@ body {
     margin-bottom: 20px;
     margin-left: 10px;
     margin-right: 10px;
-    border-block: solid #8B0E10;
-    background-color: #5D737E;
+    background-color: #5D737E; opacity: 0.6;
+}
+
+#livetext{
+    font-size:small;
+    margin-bottom: 1px;
+}
+#livetalbebody{
+    table-layout: auto;
+}
+
+#rightscore{
+    font-size: 35px;
+    font-weight:bold;
+}
+#livetablerow{
+    margin-top:2px;
+    margin-bottom:2px;
+}
+
+#leftscore {
+    font-size: 35px;
+    font-weight: bold;
+}
+#score{
+    text-align:center;
 }

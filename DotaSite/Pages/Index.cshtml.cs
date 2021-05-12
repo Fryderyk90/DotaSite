@@ -78,7 +78,8 @@ namespace DotaSite.Pages
             //var proPlayers = await _idotaProPlayerRepository.AllProPlayers(proPlayerUri);
             //Roster = _idotaTeamRepository.TeamRoster(DotaTeams, proPlayers);
             LiveMatches = await _idotaMatchInfoRepository.GetLiveMatches(liveUri);
-          
+
+
             HeroesInLive = _idotaMatchInfoRepository.HeroesInLiveMatches(allHeroes.ToList(), LiveMatches.ToList());
         }
     }
