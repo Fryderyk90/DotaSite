@@ -162,6 +162,8 @@ body {
     border-right: solid #8B0E10;
     border-top: solid #8B0E10;
     background-color: #5D737E;
+    grid-auto-flow: column;
+    display: inline-flex;
 }
 #playerscard {
     margin-top: 20px;
@@ -182,6 +184,7 @@ body {
 #rightscore{
     font-size: 35px;
     font-weight:bold;
+    color: red;
 }
 #livetablerow{
     margin-top:2px;
@@ -191,7 +194,18 @@ body {
 #leftscore {
     font-size: 35px;
     font-weight: bold;
+    color: #00cd00;
+}
+#seperator{
+    font-size:35px;
 }
 #score{
     text-align:center;
+}
+
+
+
+/*Teams-----------------------------*/
+#teamname{
+    text-align:right
 }

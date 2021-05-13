@@ -34,6 +34,11 @@ namespace Dota.Core.Models
 
         [JsonProperty("logo_url")]
         public Uri LogoUrl { get; set; }
+
+        public static implicit operator DotaTeam(List<DotaTeam> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public partial class DotaTeam

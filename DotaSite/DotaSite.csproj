@@ -9,4 +9,7 @@
     <ProjectReference Include="..\Dota.Data\Dota.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Teams\" />
+  </ItemGroup>
 </Project>

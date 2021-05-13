@@ -1,0 +1,45 @@
+@page
+@model DotaSite.Pages.Teams.AllTeams
+
+@{
+    ViewData["Title"] = "Teams";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div>
+        @foreach (var roster in Model.Roster)
+        {
+        <div class="card-body col-sm-6">
+            <div class="card-body">
+                <div class="card-header">
+                    <h3 id="teamname">
+
+
+                        <span id="teamheader">
+                            @roster.Team.Name
+                        </span>
+                        <span>
+                            <img src="@roster.Team.LogoUrl" width="100px;" height="100px;" />
+                        </span>
+                    </h3>
+                  
+                    <p>@roster.Player.Personaname</p>
+                    <img src="@roster.Player.Avatar" />
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+            
+        }
+    </div>
+</body>
+</html>
