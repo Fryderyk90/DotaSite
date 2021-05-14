@@ -16,9 +16,12 @@ namespace Dota.Data.Services
             foreach (var player in proPlayers)
             {
                 var team = teams.Find(t => t.TeamId == player.TeamId);
-               
+
+                
+                
                     DotaTeamRoster roster = new DotaTeamRoster
                     {
+                   
                         Player = player,
                         Team = team
                     };
@@ -29,6 +32,7 @@ namespace Dota.Data.Services
             }
             return teamRoster;
         }
+
 
         async Task<List<DotaTeam>> IDotaTeamRepository.AllTeamsAsync(string teamUri)
         {

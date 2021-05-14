@@ -1,37 +1,44 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Dota.Core.Models;
 using Dota.Data.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DotaSite.Pages.Teams
 {
     public class AllTeams : PageModel
     {
-        private readonly IDotaProPlayerRepository _proPlayers;
-        private readonly IDotaTeamRepository _teamRepository;
+        
         private readonly IConfiguration _configuration;
+        private readonly IDotaTeamRepository _dotaTeams;
+        private readonly IDotaHeroRepository _dotaHeros;
+        private readonly IDotaProPlayerRepository _dotaPlayers;
 
-        public List<DotaTeam> DotaTeams { get; set; }
-        public List<DotaTeamRoster> Roster { get; set; }
 
-
-        public AllTeams(IDotaTeamRepository teamRepository, IConfiguration configuration, IDotaProPlayerRepository proPlayers)
+        public List<DotaTeamRoster> DotaTeams { get; set; }
+        public AllTeams
+        (
+            IConfiguration configuration, 
+            IDotaTeamRepository dotaTeams, 
+            IDotaHeroRepository dotaHeros, 
+            IDotaProPlayerRepository dotaPlayers
+            )
         {
-            _teamRepository = teamRepository;
             _configuration = configuration;
-            _proPlayers = proPlayers;
+            _dotaTeams = dotaTeams;
+            _dotaHeros = dotaHeros;
+            _dotaPlayers = dotaPlayers;
         }
 
         public async Task OnGetAsync()
         {
-
+            var playerUri = _configuration.GetValue<string>("Dotasettings:DotaProPlayers");
             var teamUri = _configuration.GetValue<string>("DotaSettings:DotaTeams");
-            var proPlayerUri = _configuration.GetValue<string>("DotaSettings:DotaProPlayers");
-            DotaTeams = await _teamRepository.AllTeamsAsync(teamUri);
-            var players = await _proPlayers.AllProPlayers(proPlayerUri);
-            Roster =  _teamRepository.TeamRoster(DotaTeams, players);
+
+            var teams = await _dotaTeams.AllTeamsAsync(teamUri);
+            var players =await _dotaPlayers.AllProPlayers(playerUri);
+            DotaTeams = _dotaTeams.TeamRoster(teams, players);
         }
     }
 }
